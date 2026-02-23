@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'
+        jdk 'JDK21'
+    }
+
     stages {
 
         stage('Checkout Code') {
@@ -30,7 +35,6 @@ pipeline {
 
     post {
         success {
-            echo 'Library JAR packaged and installed successfully'
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
         failure {
